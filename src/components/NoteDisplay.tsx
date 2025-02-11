@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Atkinson_Hyperlegible } from "next/font/google";
 
 const atinkson = Atkinson_Hyperlegible({
+  subsets: ["latin"],
   weight: "400",
 });
 export default function NoteDisplay({
