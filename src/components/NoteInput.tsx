@@ -77,7 +77,7 @@ export default function NoteInput() {
       <div className="flex items-center justify-center">
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="mt-2 px-10 py-6" onClick={handleGenLink}>
+            <Button className="mt-2 px-10 py-6 w-full mx-4 sm:w-auto" onClick={handleGenLink}>
               <Settings
                 className={
                   settingsSpin ? `motion-preset-spin transition-all` : ``
