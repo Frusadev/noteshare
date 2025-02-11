@@ -1,9 +1,8 @@
 "use client";
-import { Check, ClipboardCopy, Paperclip, Settings } from "lucide-react";
+import { Check, ClipboardCopy, Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
-import { useState } from "react";
-import { v4 as uuidV4 } from "uuid";
+import { MouseEvent as ReactMouseEvent, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,8 +13,8 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import axios from "axios";
-import { INote } from "@/app/api/db/schemas/Note";
 import { loadEnv } from "@/app/api/config";
+import { genID } from "@/algo";
 
 export default function NoteInput() {
   const [settingsSpin, setSettingsSpin] = useState(false);
@@ -24,19 +23,17 @@ export default function NoteInput() {
   const [noteContent, setNoteContent] = useState("");
   const [name, setName] = useState("");
 
-  const handleGenLink = () => {
+  const handleGenLink = (e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (!name || !noteContent) return;
     setSettingsSpin(true);
+
     const note = {
+      id: genID(),
       authorName: name,
-      id: uuidV4(),
       content: noteContent,
-      date: new Date().toJSON(),
     };
-    console.log(note)
-    console.log(note.date.toString())
-    console.log(Date.parse(note.date))
+
     const URL = loadEnv().URL;
-    console.log(URL)
 
     axios({
       method: "POST",

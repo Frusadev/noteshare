@@ -1,22 +1,17 @@
-import { Note } from "@/app/api/db/schemas/Note";
-import type { INote } from "@/app/api/db/schemas/Note";
-import { connectDB, connectedToDB } from "./setup";
-
-export async function getNoteById(id: string) {
-  if (!connectedToDB) {
-    connectDB();
+import type { INote } from "./interfaces";
+import Note from "./models";
+import { dbConnected, setupMongo } from "./setup";
+export async function addNote(note: INote) {
+  if (!dbConnected) {
+    await setupMongo()
   }
-  const note = Note.findOne({ id: id });
-  return note;
+  const newNote = new Note(note);
+  newNote.save();
 }
 
-export async function addNote(note: INote) {
-  const newNote = new Note({
-    authorName: note.authorName,
-    id: note.id,
-    content: note.content,
-    date: note.date,
-  });
-
-  return newNote.save();
+export async function getNoteById(id: string) {
+  if (!dbConnected) {
+    await setupMongo()
+  }
+  return Note.findOne({ id });
 }
