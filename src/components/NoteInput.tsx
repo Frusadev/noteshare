@@ -36,6 +36,7 @@ export default function NoteInput() {
     console.log(note.date.toString())
     console.log(Date.parse(note.date))
     const URL = loadEnv().URL;
+    console.log(URL)
 
     axios({
       method: "POST",
