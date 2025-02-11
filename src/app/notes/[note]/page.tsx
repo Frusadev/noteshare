@@ -43,11 +43,14 @@ export default function NotePage({
           </CardContent>
         </Card>
       ) : (
-        <NoteDisplay author={authorName}>{noteContent}</NoteDisplay>
+        <div className="flex flex-col">
+          <NoteDisplay author={authorName}>{noteContent}</NoteDisplay>
+
+          <Button asChild className="w-full mx-3 sm:w-auto">
+            <Link href="/">Create your own</Link>
+          </Button>
+        </div>
       )}
-      <Button asChild className="w-full mx-3 sm:w-auto">
-        <Link href="/">Create your own</Link>
-      </Button>
     </div>
   );
 }
