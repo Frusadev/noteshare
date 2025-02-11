@@ -51,10 +51,7 @@ export default function NoteInput() {
   };
 
   const copyLink = () => {
-    setLink("https://noteshare.com/notes/123");
-    console.log(link);
     navigator.clipboard.writeText(link);
-    console.log("Copied to clipboard");
     if (!copied) {
       setCopied(true);
       setTimeout(() => {
